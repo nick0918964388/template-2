@@ -10,14 +10,15 @@ interface Note {
 
 interface NotesListProps {
   notes: Note[];
+  onBack: () => void;
 }
 
-export default function NotesList({ notes }: NotesListProps) {
+export default function NotesList({ notes, onBack }: NotesListProps) {
   return (
-    <div className="w-full max-w-2xl relative pt-16"> {/* 增加 pt-16 來為返回按鈕留出空間 */}
+    <div className="w-full max-w-2xl relative pt-16">
       <motion.button
-        onClick={() => window.location.reload()}
-        className="fixed top-8 left-8 flex items-center text-gray-400 hover:text-orange-400 transition-colors z-10"
+        onClick={onBack}
+        className="fixed top-8 left-8 flex items-center text-gray-400 hover:text-blue-400 transition-colors z-10"
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.2 }}
@@ -27,7 +28,7 @@ export default function NotesList({ notes }: NotesListProps) {
       </motion.button>
 
       {notes.length === 0 ? (
-        <p className="text-gray-400 text-xl text-center">還沒有筆記。開始錄音來創建您的第一個筆記！</p>
+        <p className="text-gray-400 text-xl text-center">還沒有對話記錄。開始錄音來創建您的第一個對話！</p>
       ) : (
         <ul className="space-y-4">
           {notes.map((note, index) => (

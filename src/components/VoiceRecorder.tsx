@@ -44,7 +44,7 @@ export default function VoiceRecorder({ onNewNote }: VoiceRecorderProps) {
       <motion.button
         onClick={isRecording ? handleStopRecording : handleStartRecording}
         className={`w-48 h-48 rounded-full transition-all duration-500 ease-in-out ${
-          isRecording ? 'bg-red-500 hover:bg-red-600' : 'bg-orange-500 hover:bg-orange-600'
+          isRecording ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'
         } shadow-lg hover:shadow-xl flex items-center justify-center`}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}

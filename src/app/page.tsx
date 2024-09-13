@@ -7,6 +7,7 @@ import { DeepgramContextProvider } from "@/lib/contexts/DeepgramContext";
 import { AuthProvider } from "@/lib/contexts/AuthContext";
 import { getDocuments } from "@/lib/firebase/firebaseUtils";
 import { motion, AnimatePresence } from 'framer-motion';
+import { List } from 'lucide-react'; // 導入 List 圖標
 
 export default function Home() {
   const [notes, setNotes] = useState<any[]>([]);
@@ -36,7 +37,7 @@ export default function Home() {
     setTimeout(() => {
       setShowTranscript(false);
       setShowAllNotes(true);
-    }, 3000); // 顯示轉錄文本 3 秒後切換到所有筆記頁面
+    }, 3000);
     await getDocuments("notes").then(setNotes);
   };
 
@@ -56,9 +57,20 @@ export default function Home() {
           </div>
           
           {!showAllNotes && (
-            <h1 className="text-6xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-600">
-              語音筆記應用
-            </h1>
+            <>
+              <h1 className="text-6xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
+                臺鐵檢修助理
+              </h1>
+              <motion.button
+                onClick={() => setShowAllNotes(true)}
+                className="fixed top-8 right-8 flex items-center text-gray-400 hover:text-blue-400 transition-colors z-10"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <List className="mr-2" />
+                對話歷史
+              </motion.button>
+            </>
           )}
           
           <AnimatePresence>
@@ -110,7 +122,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <NotesList notes={notes} />
+                <NotesList notes={notes} onBack={() => setShowAllNotes(false)} />
               </motion.div>
             )}
           </AnimatePresence>
